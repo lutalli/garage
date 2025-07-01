@@ -4,7 +4,7 @@ local function open_win_config_func()
     local tree_w = 80
     local tree_h = math.floor(tree_w * scr_h / scr_w)
     return {
-	border = "rounded",
+	border = "double",
 	relative = "editor",
 	width = tree_w,
 	height = tree_h,
@@ -15,45 +15,55 @@ end
 
 require("nvim-tree").setup {
     view = {
-	signcolumn = "no",
+	signcolumn = "yes",
 	float = {
 	    enable = true,
 	    open_win_config = open_win_config_func
 	},
 	cursorline = false
     },
+    modified = {
+	enable = true
+    },
     renderer = {
+	indent_width = 3,
 	icons = {
-	    git_placement = "after",
-	    symlink_arrow = " 󰁕 ",
 	    show = {
 		hidden = true
 	    },
+	    git_placement = "after",
+	    bookmarks_placement = "after",
+	    symlink_arrow = " -> ",
 	    glyphs = {
-		default = "󱓻",
-		symlink = "",
-		bookmark = "",
-		modified = "",
-		hidden = "󰊠",
 		folder = {
 		    arrow_closed = " ",
 		    arrow_open = " ",
 		    default = "",
 		    open = "",
-		    empty = "",
+		    empty = "",
 		    empty_open = "",
 		    symlink = "",
 		    symlink_open = ""
 		},
+		default = "󱓻",
+		symlink = "󱓻",
+		bookmark = "",
+		modified = "",
+		hidden = "󱙝",
 		git = {
-		    unmerged = "",
-		    untracked = "󰫢",
-		    renamed = "",
-		    deleted = "",
-		    ignored = ""
+		    unstaged = "×",
+		    staged = "",
+		    unmerged = "󰧾",
+		    untracked = "",
+		    renamed = "",
+		    deleted = "",
+		    ignored = "∅"
 		}
 	    }
 	}
+    },
+    filters = {
+	git_ignored = false
     },
     hijack_cursor = true,
     sync_root_with_cwd = true
